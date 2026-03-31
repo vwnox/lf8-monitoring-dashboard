@@ -1,6 +1,7 @@
 from flask import Flask
-from api import get_weather
-from system import get_system_data
+from app.api import get_weather
+from app.system import get_system_data
+import os
 
 app = Flask(__name__)
 
@@ -11,6 +12,7 @@ def home():
 
     return f"""
     <h1>Monitoring Dashboard</h1>
+
     <h2>Wetter</h2>
     <p>Temperatur: {weather['temperature']} °C</p>
     <p>Zustand: {weather['weather']}</p>
@@ -20,9 +22,6 @@ def home():
     <p>RAM: {system['memory_usage']} %</p>
     """
 
-import os
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-    
